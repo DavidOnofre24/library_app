@@ -14,31 +14,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: const CustomAppBar(),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                BlocBuilder<BookCubit, BookState>(builder: (context, state) {
-                  if (state is BookLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+    return Scaffold(
+        appBar: const CustomAppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              BlocBuilder<BookCubit, BookState>(builder: (context, state) {
+                if (state is BookLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-                  if (state is BookLoaded) {
-                    return BooksLoadedWidget(booksList: state.books);
-                  }
+                if (state is BookLoaded) {
+                  return BooksLoadedWidget(booksList: state.books);
+                }
 
-                  if (state is BookError) {
-                    return Center(child: Text(state.message));
-                  }
+                if (state is BookError) {
+                  return Center(child: Text(state.message));
+                }
 
-                  return const SizedBox();
-                })
-              ],
-            ),
-          )),
-    );
+                return const SizedBox();
+              })
+            ],
+          ),
+        ));
   }
 }
 
