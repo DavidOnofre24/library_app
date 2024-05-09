@@ -5,6 +5,7 @@ import 'package:library_app/config/router/app_router.dart';
 import 'package:library_app/config/theme/app_theme.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setupDependencyInjection();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MainApp());
