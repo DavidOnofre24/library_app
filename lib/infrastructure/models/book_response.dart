@@ -1,6 +1,6 @@
 class BookResponse {
   final List<Book> books;
-  final int total;
+  final String total;
 
   BookResponse({
     required this.books,
