@@ -12,6 +12,9 @@ class LocalSearchHistoryDatasource implements SearchHistoryDatasource {
         sharedPreferences.getStringList('searchHistories') ?? [];
     searchHistories.remove(query);
     searchHistories.insert(0, query);
+    if (searchHistories.length > 5) {
+      searchHistories.removeLast();
+    }
     await sharedPreferences.setStringList('searchHistories', searchHistories);
   }
 
