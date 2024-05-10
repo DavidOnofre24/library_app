@@ -62,27 +62,40 @@ class BooksLoadedWidget extends StatelessWidget {
             ),
           ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: (booksList.length / 2).ceil(),
-          itemBuilder: (context, index) {
-            int startIndex = index * 2;
-            int endIndex = startIndex + 2 > booksList.length
-                ? booksList.length
-                : startIndex + 2;
-
-            return IntrinsicHeight(
-              child: Row(
-                children: List.generate(endIndex - startIndex, (i) {
-                  final book = booksList[startIndex + i];
-                  return ItemBook(book: book);
-                }),
-              ),
-            );
-          },
-        ),
+        _BooksListView(booksList: booksList),
       ],
+    );
+  }
+}
+
+class _BooksListView extends StatelessWidget {
+  final List<BookEntity> booksList;
+
+  const _BooksListView({
+    required this.booksList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: (booksList.length / 2).ceil(),
+      itemBuilder: (context, index) {
+        int startIndex = index * 2;
+        int endIndex = startIndex + 2 > booksList.length
+            ? booksList.length
+            : startIndex + 2;
+
+        return IntrinsicHeight(
+          child: Row(
+            children: List.generate(endIndex - startIndex, (i) {
+              final book = booksList[startIndex + i];
+              return ItemBook(book: book);
+            }),
+          ),
+        );
+      },
     );
   }
 }

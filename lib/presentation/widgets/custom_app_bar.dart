@@ -9,27 +9,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleMedium;
     return AppBar(
-      title: Text('Library app', style: titleStyle),
+      title: const Text(
+        'Library app',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       centerTitle: false,
       actions: [
         IconButton(
-          onPressed: () {
-            showSearch(
-              context: context,
-              delegate: SearchBooksDelegate(
-                bloc: context.read<SearchCubit>(),
-              ),
-            ).then((value) {
-              if (value == null) return;
-              context.go('/book-detail/$value');
-            });
-          },
+          onPressed: () => _showSearch(context),
           icon: const Icon(Icons.search),
         ),
       ],
     );
+  }
+
+  _showSearch(BuildContext context) {
+    showSearch(
+      context: context,
+      delegate: SearchBooksDelegate(
+        bloc: context.read<SearchCubit>(),
+      ),
+    ).then((value) {
+      if (value == null) return;
+      context.go('/book-detail/$value');
+    });
   }
 
   @override
