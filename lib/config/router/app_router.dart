@@ -18,8 +18,11 @@ final appRouter = GoRouter(
                       BookCubit(bookRepository: getIt.get())..getReleaseBooks(),
                 ),
                 BlocProvider(
-                  create: (context) =>
-                      SearchCubit(bookSearchByQuery: getIt.get()),
+                  create: (context) => SearchCubit(
+                    bookSearchByQuery: getIt.get(),
+                    addSearchHistoryUseCase: getIt.get(),
+                    getSearchHistoryUseCase: getIt.get(),
+                  )..getSearchHistories(),
                 ),
               ],
               child: const HomeScreen(),

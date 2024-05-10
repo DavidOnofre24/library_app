@@ -41,15 +41,32 @@ class SearchBooksDelegate extends SearchDelegate<String?> {
       builder: (context, state) {
         if (state is SearchLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is SearchLoaded) {
+        }
+        if (state is SearchLoaded) {
           return buildResultsAndSuggestions(state.items, context);
-        } else if (state is SearchError) {
+        }
+        if (state is SearchError) {
           return Center(child: Text(state.message));
-        } else {
-          return const Center(
-            child: Text('Start searching books'),
+        }
+        if (state is SearchInitial) {
+          if (state.searchHistories.isEmpty) {
+            return const Center(
+              child: Text('Start searching books'),
+            );
+          }
+          return ListView.builder(
+            itemCount: state.searchHistories.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: const Icon(Icons.history),
+              title: Text(state.searchHistories[index]),
+              onTap: () {
+                query = state.searchHistories[index];
+                bloc.search(state.searchHistories[index]);
+              },
+            ),
           );
         }
+        return const SizedBox();
       },
     );
   }
