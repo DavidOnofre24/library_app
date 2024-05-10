@@ -113,8 +113,19 @@ class ItemListile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Image.network(
+          item.image,
+          width: 50,
+          height: 100,
+        ),
+      ),
       onTap: onTap,
-      title: Text(item.title),
+      title: Text(item.title, maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: Text(item.price),
     );
   }

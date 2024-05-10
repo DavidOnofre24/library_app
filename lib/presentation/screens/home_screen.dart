@@ -48,12 +48,16 @@ class BooksLoadedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'New Release',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+        Container(
+          padding: const EdgeInsets.only(left: 10),
+          child: const Text(
+            'New Releases',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         ListView.builder(
@@ -81,7 +85,7 @@ class BooksLoadedWidget extends StatelessWidget {
   }
 }
 
-class ItemBook extends StatelessWidget {
+class ItemBook extends StatefulWidget {
   const ItemBook({
     super.key,
     required this.book,
@@ -90,13 +94,35 @@ class ItemBook extends StatelessWidget {
   final BookEntity book;
 
   @override
+  State<ItemBook> createState() => _ItemBookState();
+}
+
+class _ItemBookState extends State<ItemBook> {
+  Color getDarkRandomColor() {
+    Random random = Random();
+    int r = random.nextInt(256);
+    int g = random.nextInt(256);
+    int b = random.nextInt(256);
+
+    r = (r * 0.8).toInt();
+    g = (g * 0.8).toInt();
+    b = (b * 0.8).toInt();
+
+    return Color.fromRGBO(r, g, b, 1);
+  }
+
+  Color? _randomColor;
+
+  @override
   Widget build(BuildContext context) {
+    _randomColor ??= getDarkRandomColor();
     return Expanded(
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () {
-              context.go('/book-detail/${book.isbn13}');
+              context.go('/book-detail/${widget.book.isbn13}',
+                  extra: _randomColor);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -111,15 +137,18 @@ class ItemBook extends StatelessWidget {
                               left: BorderSide(width: 0.5, color: Colors.grey),
                               right: BorderSide(width: 0.5, color: Colors.grey),
                               top: BorderSide(width: 0.5, color: Colors.grey)),
-                          color: getDarkRandomColor(),
+                          color: _randomColor,
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8))),
-                      child: CachedNetworkImage(
-                        imageUrl: book.image,
-                        height: 200,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: widget.book.isbn13,
+                        child: CachedNetworkImage(
+                          imageUrl: widget.book.image,
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -141,7 +170,7 @@ class ItemBook extends StatelessWidget {
                         children: [
                           const SizedBox(height: 8),
                           Text(
-                            book.title,
+                            widget.book.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -151,7 +180,7 @@ class ItemBook extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            book.price,
+                            widget.book.price,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                               fontSize: 14,
@@ -167,18 +196,5 @@ class ItemBook extends StatelessWidget {
             ),
           )),
     );
-  }
-
-  Color getDarkRandomColor() {
-    Random random = Random();
-    int r = random.nextInt(256);
-    int g = random.nextInt(256);
-    int b = random.nextInt(256);
-
-    r = (r * 0.8).toInt();
-    g = (g * 0.8).toInt();
-    b = (b * 0.8).toInt();
-
-    return Color.fromRGBO(r, g, b, 1);
   }
 }

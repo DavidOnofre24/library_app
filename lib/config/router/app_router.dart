@@ -34,7 +34,9 @@ final appRouter = GoRouter(
             builder: (context, state) => BlocProvider(
               create: (context) => BookDetailCubit(bookRepository: getIt.get())
                 ..getBookDetail(state.params['id'] ?? '0'),
-              child: const BookDetailScreen(),
+              child: BookDetailScreen(
+                color: state.extra,
+              ),
             ),
           ),
         ]),

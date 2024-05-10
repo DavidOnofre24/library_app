@@ -30,34 +30,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ],
     );
-    // return SafeArea(
-    //     bottom: false,
-    //     child: Padding(
-    //       padding: const EdgeInsets.symmetric(horizontal: 10),
-    //       child: SizedBox(
-    //         width: double.infinity,
-    //         child: Row(
-    //           children: [
-    //             const SizedBox(width: 10),
-    //             Text('Library app', style: titleStyle),
-    //             const Spacer(),
-    //             IconButton(
-    //                 onPressed: () {
-    //                   showSearch(
-    //                     context: context,
-    //                     delegate: SearchBooksDelegate(
-    //                       bloc: context.read<SearchCubit>(),
-    //                     ),
-    //                   ).then((value) {
-    //                     if (value == null) return;
-    //                     context.go('/book-detail/$value');
-    //                   });
-    //                 },
-    //                 icon: const Icon(Icons.search))
-    //           ],
-    //         ),
-    //       ),
-    //     ));
   }
 
   @override
