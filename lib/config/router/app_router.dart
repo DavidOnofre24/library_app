@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:library_app/config/dependency_injection/dependency_injection.dart';
-import 'package:library_app/presentation/providers/search/cubit/search_cubit.dart';
 import 'package:library_app/presentation/screens/screens.dart';
 import 'package:library_app/presentation/providers/providers.dart';
 
