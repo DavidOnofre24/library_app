@@ -1,16 +1,22 @@
 # library_app
 
-A new Flutter project.
+Entrega de prueba, libreria app para bancolombia
 
-## Getting Started
+version de flutter: 3.19.6
 
-This project is a starting point for a Flutter application.
+Para iniciar la aplicacion se debe ejecutar los siguientes comandos:
 
-A few resources to get you started if this is your first Flutter project:
+- flutter clean
+- flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+iOS:
+- cd ios
+- pod install 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Generar aplicacion Android:
+- flutter run build bundle 
+
+Generar aplicacion iOS:
+- flutter run build ipa
+
+Hecho por David Onofre
