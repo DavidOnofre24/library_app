@@ -11,7 +11,6 @@ class BookDetailEntity {
   final String price;
   final String image;
   final String url;
-  final String pdf;
 
   BookDetailEntity({
     required this.title,
@@ -26,6 +25,5 @@ class BookDetailEntity {
     required this.price,
     required this.image,
     required this.url,
-    required this.pdf,
   });
 }
