@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:library_app/domain/entities/book_entity.dart';
 import 'package:library_app/presentation/providers/search/cubit/search_cubit.dart';
+import 'package:lottie/lottie.dart';
 
 class SearchBooksDelegate extends SearchDelegate<String?> {
   final SearchCubit bloc;
@@ -40,7 +41,7 @@ class SearchBooksDelegate extends SearchDelegate<String?> {
       bloc: bloc,
       builder: (context, state) {
         if (state is SearchLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: Lottie.asset('assets/lottie/books.json'));
         }
         if (state is SearchLoaded) {
           return buildResultsAndSuggestions(state.items, context);

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:library_app/presentation/providers/book_detail/cubit/book_detail_cubit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailScreen extends StatelessWidget {
@@ -30,7 +31,8 @@ class BookDetailScreen extends StatelessWidget {
                 bloc: context.read<BookDetailCubit>(),
                 builder: (context, state) {
                   if (state is BookDetailLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: Lottie.asset('assets/lottie/books.json'));
                   }
 
                   if (state is BookDetailLoaded) {

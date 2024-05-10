@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:library_app/domain/entities/book_entity.dart';
 import 'package:library_app/presentation/providers/book/cubit/book_cubit.dart';
 import 'package:library_app/presentation/widgets/custom_app_bar.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
   static const name = 'home-screen';
@@ -22,7 +23,8 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 10),
               BlocBuilder<BookCubit, BookState>(builder: (context, state) {
                 if (state is BookLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: Lottie.asset('assets/lottie/books.json'));
                 }
 
                 if (state is BookLoaded) {
